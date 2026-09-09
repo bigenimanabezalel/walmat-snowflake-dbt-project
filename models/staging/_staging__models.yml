@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_walmart__stores
+    description: "One row per store with current type and size."
+    columns:
+      - name: store_id
+        tests: [not_null, unique]
+
+  - name: stg_walmart__sales
+    description: "Weekly sales at store + department + date grain."
+    columns:
+      - name: store_id
+        tests: [not_null]
+      - name: dept_id
+        tests: [not_null]
+      - name: sales_date
+        tests: [not_null]
+
+  - name: stg_walmart__economic
+    description: "Weekly economic indicators at store + date grain."
+    columns:
+      - name: store_id
+        tests: [not_null]
+      - name: sales_date
+        tests: [not_null]
+
+  - name: stg_walmart__store_dept
+    description: "Distinct store+dept combinations with current store attributes; feeds the SCD2 snapshot."
+    columns:
+      - name: store_id
+        tests: [not_null]
+      - name: dept_id
+        tests: [not_null]

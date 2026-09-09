@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: raw
+    database: WALMART_DB
+    schema: RAW
+    tables:
+      - name: raw_stores
+        description: "One row per store: type and size. Loaded from stores.csv."
+        columns:
+          - name: store
+            tests: [not_null, unique]
+      - name: raw_sales
+        description: "Weekly sales by store/department. Loaded from department.csv."
+        columns:
+          - name: store
+            tests: [not_null]
+          - name: dept
+            tests: [not_null]
+          - name: date
+            tests: [not_null]
+      - name: raw_economic
+        description: "Weekly store-level economic indicators. Loaded from fact.csv."
+        columns:
+          - name: store
+            tests: [not_null]
+          - name: date
+            tests: [not_null]
