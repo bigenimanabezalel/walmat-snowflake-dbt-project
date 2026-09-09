@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: walmart_date_dim
+    description: "SCD1 date dimension. One row per calendar date."
+    columns:
+      - name: date_id
+        tests: [not_null, unique]
+
+  - name: walmart_store_dim
+    description: "SCD2 store dimension. One row per store+dept version."
+    columns:
+      - name: store_id
+        tests: [not_null]
+      - name: dept_id
+        tests: [not_null]
+
+  - name: walmart_fact_table
+    description: "Fact table at store+dept+date grain, joined to economic indicators and versioned store attributes."
+    columns:
+      - name: store_id
+        tests: [not_null]
+      - name: dept_id
+        tests: [not_null]
+      - name: date_id
+        tests: [not_null]
